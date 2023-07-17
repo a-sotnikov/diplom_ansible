@@ -1,0 +1,30 @@
+---
+# tasks file for docker
+- name: Install docker repo
+  ansible.builtin.yum_repository:
+    name: docker-ce
+    baseurl:
+      - https://download.docker.com/linux/fedora/37/x86_64/stable
+    enabled: true
+    gpgcheck: true
+    gpgkey:
+      - https://download.docker.com/linux/fedora/gpg
+    state: present
+    description: 'Docker CE Stable'
+
+- name: Install docker
+  ansible.builtin.dnf:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    update_cache: true
+    state: present
+    enablerepo: Docker CE Stable
+  notify: Start docker engine
+
+- name: Add service acc to docker group
+  ansible.builtin.user:
+    user: serv_acc
+    group: docker
+    state: present

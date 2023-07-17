@@ -1,0 +1,6 @@
+---
+# tasks file for docker
+- name: Install docker
+  ansible.builtin.include_tasks:
+    file: install_docker.yml
+  when: not docker.skip_install

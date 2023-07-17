@@ -1,0 +1,5 @@
+---
+# defaults file for monitoring
+_prometheus:
+  url: https://github.com/prometheus/prometheus/releases/download/v{{ prometheus.version }}/prometheus-{{ prometheus.version }}.linux-amd64.tar.gz
+  unarchive_dir: prometheus-{{ prometheus.version }}.linux-amd64

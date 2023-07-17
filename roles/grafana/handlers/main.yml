@@ -1,0 +1,11 @@
+---
+# handlers file for monitoring
+- name: Systemd daemon reload
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Grafana restart
+  ansible.builtin.systemd:
+    service: grafana-server
+    enabled: true
+    state: restarted

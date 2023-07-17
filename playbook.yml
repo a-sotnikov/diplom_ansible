@@ -37,13 +37,3 @@
   roles:
     -elk
   vars_files: config.yml
-
-  tasks:
-    - name: Install docker repo
-      ansible.builtin.dnf:
-        name:
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
-        update_cache: true
-        state: present

@@ -1,7 +1,23 @@
-- name: Setup logging infra
+- name: Setup docker
   hosts: logs
   gather_facts: false
   become: true
   roles:
-    - logging
+    - docker
+  vars_files: config.yml
+
+- name: Setup and configure elasticsearch
+  hosts: es
+  gather_facts: false
+  become: true
+  roles:
+    - elasticsearch
+  vars_files: config.yml
+
+- name: Setup and configure kibana
+  hosts: kibana
+  gather_facts: false
+  become: true
+  roles:
+    - kibana
   vars_files: config.yml

@@ -1,0 +1,31 @@
+---
+# tasks file for monitoring
+
+- name: Add group
+  ansible.builtin.group:
+    name: "metrics"
+    state: present
+    system: true
+
+- name: Add user
+  ansible.builtin.user:
+    name: "metrics"
+    group: "metrics"
+    create_home: false
+    shell: "/usr/sbin/nologin"
+    system: true
+    state: present
+
+- name: Install node_exporter
+  ansible.builtin.include_tasks:
+    file: install_node_exporter.yml
+  when: not node_exporter.skip_install
+
+- name: Install prometheus-nginxlog-exporter
+  ansible.builtin.include_tasks:
+    file: install_nginxlog_exporter.yml
+  when: not nginxlog_exporter.skip_install
+
+- name: Configure prometheus-nginxlog-exporter
+  ansible.builtin.include_tasks:
+    file: configure_nginxlog_exporter.yml

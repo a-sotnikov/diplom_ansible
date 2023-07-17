@@ -1,0 +1,25 @@
+---
+# tasks file for grafana
+- name: Add group
+  ansible.builtin.group:
+    name: "grafana"
+    state: present
+    system: true
+
+- name: Add user
+  ansible.builtin.user:
+    name: "grafana"
+    group: "grafana"
+    create_home: false
+    shell: "/usr/sbin/nologin"
+    system: true
+    state: present
+
+- name: Install grafana
+  ansible.builtin.include_tasks:
+    file: install_grafana.yml
+  when: not grafana.skip_install
+
+- name: Configure grafana
+  ansible.builtin.include_tasks:
+    file: configure_grafana.yml

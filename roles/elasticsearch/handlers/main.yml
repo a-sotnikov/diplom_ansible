@@ -1,0 +1,11 @@
+---
+# handlers file for logs
+- name: Start elasticsearch
+  community.docker.docker_container:
+    name: elasticsearch
+    state: started
+
+- name: Retart elasticsearch
+  community.docker.docker_container:
+    name: elasticsearch
+    restart: true

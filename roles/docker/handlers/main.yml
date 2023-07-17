@@ -1,0 +1,7 @@
+---
+# handlers file for docker
+- name: Start docker engine
+  ansible.builtin.systemd:
+    service: docker
+    state: restarted
+    enabled: true

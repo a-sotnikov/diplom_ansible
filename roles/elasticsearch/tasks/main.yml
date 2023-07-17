@@ -1,0 +1,57 @@
+---
+# tasks file for logs
+
+- name: Add group
+  ansible.builtin.group:
+    name: "elasticsearch"
+    state: present
+    system: true
+
+- name: Add user
+  ansible.builtin.user:
+    name: "elasticsearch"
+    group: "elasticsearch"
+    create_home: false
+    shell: "/usr/sbin/nologin"
+    system: true
+    state: present
+
+- name: Create dirs
+  ansible.builtin.file:
+    path: '/usr/share/elasticsearch/data'
+    owner: elasticsearch
+    mode: '764'
+    state: directory
+
+- name: Setup es volume
+  community.docker.docker_volume:
+    volume_name: es-data
+    driver: local
+
+- name: Create es container
+  community.docker.docker_container:
+    image: elasticsearch:{{ elasticsearch.version }}
+    name: elasticsearch
+    env:
+      xpack.security.enabled: "false"
+      discovery.type: "single-node"
+      cluster.name: "netology-logging"
+      node.name: "es-01"
+      bootstrap.memory_lock: "true"
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    ulimits:
+      - memlock:-1:-1
+    published_ports:
+      - "{{ elasticsearch.port }}:9200"
+    restart_policy: "on-failure"
+    restart_retries: 3
+    state: present
+  notify: Start elasticsearch
+
+# - name: Open firewalld ports
+#   ansible.posix.firewalld:
+#     port: "{{ elasticsearch.port }}/tcp"
+#     state: enabled
+#     immediate: true
+#     permanent: true

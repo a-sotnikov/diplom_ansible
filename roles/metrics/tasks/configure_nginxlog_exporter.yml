@@ -1,0 +1,10 @@
+---
+- name: Copy prometheus-nginxlog-exporter config file
+  ansible.builtin.template:
+    src: 'configs/prometheus-nginxlog-exporter.yml.j2'
+    dest: '{{ nginxlog_exporter.config_dir }}/prometheus-nginxlog-exporter.yml'
+    force: true
+    owner: metrics
+    group: metrics
+    mode: '664'
+  notify: Nginxlog_exporter restart

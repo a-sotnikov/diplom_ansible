@@ -18,12 +18,16 @@ all:
     logs:
       hosts:
         es:
-          ansible_host: 84.201.158.100
+          ansible_host: 51.250.6.152
         kibana:
-          ansible_host: 51.250.64.34
+          ansible_host: 130.193.50.37
 
     filebeat_servers:
       webservers:
+
+    docker_servers:
+      logs:
+      #filebeat_servers:
   
   vars:
     ansible_user: serv_acc

@@ -1,0 +1,11 @@
+---
+# handlers file for logs
+- name: Start kibana
+  community.docker.docker_container:
+    name: kibana
+    state: started
+
+- name: Start kibana
+  community.docker.docker_container:
+    name: kibana
+    restart: true

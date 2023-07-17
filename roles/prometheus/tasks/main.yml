@@ -1,0 +1,27 @@
+---
+# tasks file for monitoring
+
+- name: Add group
+  ansible.builtin.group:
+    name: "prometheus"
+    state: present
+    system: true
+
+- name: Add user
+  ansible.builtin.user:
+    name: "prometheus"
+    group: "prometheus"
+    create_home: false
+    shell: "/usr/sbin/nologin"
+    system: true
+    state: present
+    home: "{{ prometheus.db_dir }}"
+
+- name: Install prometheus
+  ansible.builtin.include_tasks:
+    file: install_prometheus.yml
+  when: not prometheus.skip_install
+
+- name: Configure prometheus
+  ansible.builtin.include_tasks:
+    file: configure_prometheus.yml

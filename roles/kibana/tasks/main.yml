@@ -1,0 +1,7 @@
+---
+# tasks file for logs
+
+- name: Install kibana
+  ansible.builtin.include_tasks:
+    file: install_kibana.yml
+  when: not kibana.skip_install
