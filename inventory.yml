@@ -10,14 +10,20 @@ all:
         grafana.dip.lom:
         prometheus.dip.lom:
 
-    logs:
+    elk:
       hosts:
         es.dip.lom:
         kibana.dip.lom:
 
-    filebeat_servers:
+    logs:
       hosts:
-        webservers:
+        es:
+          ansible_host: 84.201.158.100
+        kibana:
+          ansible_host: 51.250.64.34
+
+    filebeat_servers:
+      webservers:
   
   vars:
     ansible_user: serv_acc

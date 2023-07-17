@@ -10,6 +10,12 @@
     enabled: true
     state: restarted
 
+- name: Grafana restart
+  ansible.builtin.systemd:
+    service: grafana-server
+    enabled: true
+    state: restarted
+
 - name: Nginxlog_exporter restart
   ansible.builtin.systemd:
     service: prometheus-nginxlog-exporter
@@ -19,11 +25,5 @@
 - name: Node_exporter restart
   ansible.builtin.systemd:
     service: node_exporter
-    enabled: true
-    state: restarted
-
-- name: Grafana restart
-  ansible.builtin.systemd:
-    service: grafana-server
     enabled: true
     state: restarted

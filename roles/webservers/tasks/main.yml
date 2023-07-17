@@ -1,0 +1,35 @@
+---
+# tasks file for webservers
+
+- name: Install nginx
+  when: not nginx.skip_install
+  block:
+
+    - name: Update dnf and install nginx
+      ansible.builtin.dnf:
+        # update_cache: true
+        name: nginx-{{ nginx.version }}
+        state: present
+
+    - name: Open firewalld ports
+      ansible.posix.firewalld:
+        port: "{{ nginx.port }}/tcp"
+        state: enabled
+        immediate: true
+        permanent: true
+
+- name: Update index.html
+  ansible.builtin.template:
+    src: static/index.html.j2
+    dest: /usr/share/nginx/html/index.html
+    owner: nginx
+    mode: '640'
+  notify: Restart nginx
+
+- name: Update static
+  ansible.builtin.copy:
+    src: 'static/'
+    dest: '/usr/share/nginx/html/'
+    owner: nginx
+    mode: '640'
+  notify: Restart nginx

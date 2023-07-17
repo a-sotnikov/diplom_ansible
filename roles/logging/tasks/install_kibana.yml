@@ -1,0 +1,32 @@
+---
+- name: Create dirs
+  ansible.builtin.file:
+    path: "{{ item }}"
+    owner: logging
+    mode: '744'
+    state: directory
+  loop:
+    - '/etc/kibana/config'
+    - '/usr/share/kibana'
+
+- name: Create kibana container
+  community.docker.docker_container:
+    image: kibana:{{ kibana.version }}
+    name: kibana
+    env:
+      ELASTICSEARCH_HOSTS: 'http://192.168.10.16:{{ elasticsearch.port }}'
+    volumes:
+      - /etc/kibana/config:/home/kibana/config
+    published_ports:
+      - "{{ kibana.port }}:5601"
+    restart_policy: "on-failure"
+    restart_retries: 3
+    state: present
+  notify: Start kibana
+
+# - name: Open firewalld ports
+#   ansible.posix.firewalld:
+#     port: "{{ kibana.port }}/tcp"
+#     state: enabled
+#     immediate: true
+#     permanent: true

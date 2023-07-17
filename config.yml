@@ -31,7 +31,17 @@ grafana:
   version: '10.0.1'
   port: 3000
 
-### Logs
+### Logging ###
+
+elasticsearch:
+  skip_install: false
+  version: '8.7.0'
+  port: 9200
+
+kibana:
+  skip_install: false
+  version: '8.7.0'
+  port: 5601
 
 fluent-bit:
   skip_install: false

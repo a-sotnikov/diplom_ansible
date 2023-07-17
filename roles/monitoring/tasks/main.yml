@@ -17,16 +17,6 @@
     state: present
     home: "{{ prometheus.db_dir }}"
 
-- name: Install node_exporter
-  ansible.builtin.include_tasks:
-    file: install_node_exporter.yml
-  when: not node_exporter.skip_install
-
-- name: Install prometheus-nginxlog-exporter
-  ansible.builtin.include_tasks:
-    file: install_nginxlog_exporter.yml
-  when: not nginxlog_exporter.skip_install
-
 - name: Install prometheus
   ansible.builtin.include_tasks:
     file: install_prometheus.yml
@@ -37,9 +27,15 @@
     file: install_grafana.yml
   when: not grafana.skip_install
 
-- name: Configure prometheus-nginxlog-exporter
+- name: Install node_exporter
   ansible.builtin.include_tasks:
-    file: configure_nginxlog_exporter.yml
+    file: install_node_exporter.yml
+  when: not node_exporter.skip_install
+
+- name: Install prometheus-nginxlog-exporter
+  ansible.builtin.include_tasks:
+    file: install_nginxlog_exporter.yml
+  when: not nginxlog_exporter.skip_install
 
 - name: Configure prometheus
   ansible.builtin.include_tasks:

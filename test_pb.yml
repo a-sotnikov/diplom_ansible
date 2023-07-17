@@ -1,0 +1,7 @@
+- name: Setup logging infra
+  hosts: logs
+  gather_facts: false
+  become: true
+  roles:
+    - logging
+  vars_files: config.yml
