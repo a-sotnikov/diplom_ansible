@@ -1,4 +1,20 @@
 ---
+- name: Add group
+  ansible.builtin.group:
+    name: "prometheus"
+    state: present
+    system: true
+
+- name: Add user
+  ansible.builtin.user:
+    name: "prometheus"
+    group: "prometheus"
+    create_home: false
+    shell: "/usr/sbin/nologin"
+    system: true
+    state: present
+    home: "{{ prometheus.db_dir }}"
+
 - name: Create prometheus configuration directories
   ansible.builtin.file:
     path: "{{ item }}"
@@ -39,12 +55,12 @@
     - 'console_libraries'
     - 'consoles'
 
-- name: Open firewalld ports
-  ansible.posix.firewalld:
-    port: "{{ prometheus.port }}/tcp"
-    state: enabled
-    immediate: true
-    permanent: true
+# - name: Open firewalld ports
+#   ansible.posix.firewalld:
+#     port: "{{ prometheus.port }}/tcp"
+#     state: enabled
+#     immediate: true
+#     permanent: true
 
 - name: Copy prometheus service file
   ansible.builtin.template:

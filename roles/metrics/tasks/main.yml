@@ -1,20 +1,22 @@
 ---
 # tasks file for monitoring
+- name: Create user
+  when: not node_exporter.skip_install and not nginxlog_exporter.skip_install
+  block:
+    - name: Add group
+      ansible.builtin.group:
+        name: "metrics"
+        state: present
+        system: true
 
-- name: Add group
-  ansible.builtin.group:
-    name: "metrics"
-    state: present
-    system: true
-
-- name: Add user
-  ansible.builtin.user:
-    name: "metrics"
-    group: "metrics"
-    create_home: false
-    shell: "/usr/sbin/nologin"
-    system: true
-    state: present
+    - name: Add user
+      ansible.builtin.user:
+        name: "metrics"
+        group: "metrics"
+        create_home: false
+        shell: "/usr/sbin/nologin"
+        system: true
+        state: present
 
 - name: Install node_exporter
   ansible.builtin.include_tasks:

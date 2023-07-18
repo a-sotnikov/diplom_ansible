@@ -1,0 +1,15 @@
+---
+- name: Create filebeat container
+  community.docker.docker_container:
+    image: elastic/filebeat:{{ filebeat.version }}
+    name: filebeat
+    env:
+      setup.kibana.host: kibana.dip.lom:{{ kibana.port }}
+      output.elasticsearch.hosts: ["es.dip.lom:{{ elasticsearch.port }}"]
+    volumes:
+      - /usr/share/filebeat/:/usr/share/filebeat/
+      - /var/log/nginx:/var/log/nginx
+    restart_policy: "on-failure"
+    restart_retries: 3
+    state: present
+  notify: Start filebeat

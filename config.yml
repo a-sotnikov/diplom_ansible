@@ -45,8 +45,7 @@ kibana:
 
 fluent-bit:
   skip_install: false
-  version:
-  port:
+  version: '8.7.0'
 
 docker:
   skip_install: true

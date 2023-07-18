@@ -1,13 +1,28 @@
 ---
+- name: Add group
+  ansible.builtin.group:
+    name: "grafana"
+    state: present
+    system: true
+
+- name: Add user
+  ansible.builtin.user:
+    name: "grafana"
+    group: "grafana"
+    create_home: false
+    shell: "/usr/sbin/nologin"
+    system: true
+    state: present
+
 - name: Install grafana
   ansible.builtin.dnf:
     name: "{{ _grafana.rpm_url }}"
     state: present
     disable_gpg_check: true
 
-- name: Open firewalld ports
-  ansible.posix.firewalld:
-    port: "{{ grafana.port }}/tcp"
-    state: enabled
-    immediate: true
-    permanent: true
+# - name: Open firewalld ports
+#   ansible.posix.firewalld:
+#     port: "{{ grafana.port }}/tcp"
+#     state: enabled
+#     immediate: true
+#     permanent: true

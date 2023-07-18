@@ -11,12 +11,12 @@
         name: nginx-{{ nginx.version }}
         state: present
 
-    - name: Open firewalld ports
-      ansible.posix.firewalld:
-        port: "{{ nginx.port }}/tcp"
-        state: enabled
-        immediate: true
-        permanent: true
+    # - name: Open firewalld ports
+    #   ansible.posix.firewalld:
+    #     port: "{{ nginx.port }}/tcp"
+    #     state: enabled
+    #     immediate: true
+    #     permanent: true
 
 - name: Update index.html
   ansible.builtin.template:
