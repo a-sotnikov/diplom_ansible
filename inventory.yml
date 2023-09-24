@@ -6,28 +6,28 @@ all:
         web2.dip.lom:
 
     monitoring:
-      hosts:
-        grafana.dip.lom:
-        prometheus.dip.lom:
+      children:
+        grafana:
+          hosts:
+            grafana.dip.lom:
+        prometheus:
+          hosts:
+            prometheus.dip.lom:
 
-    elk:
-      hosts:
-        es.dip.lom:
-        kibana.dip.lom:
-
-    logs:
-      hosts:
-        es:
-          ansible_host: 51.250.6.152
+    logging:
+      children:
+        elasticsearch:
+          hosts:
+            es.dip.lom:
         kibana:
-          ansible_host: 130.193.50.37
+          hosts:
+            kibana.dip.lom:
 
     filebeat_servers:
       webservers:
 
     docker_servers:
-      logs:
-      #filebeat_servers:
+      logging:
+      filebeat_servers:
   
-  vars:
     ansible_user: serv_acc

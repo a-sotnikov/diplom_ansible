@@ -21,34 +21,58 @@
     - webservers
   vars_files: config.yml
 
-- name: Setup monitoring exporters
+- name: Setup metrics exporters
   hosts: webservers
   gather_facts: false
   become: true
   roles:
-    - monitoring_metrics
+    - metrics
   vars_files: config.yml
 
-- name: Setup prometheus and grafana
-  hosts: monitoring
+- name: Setup prometheus
+  hosts: grafana
   gather_facts: false
   become: true
   roles:
-    - monitoring
+    - grafana
   vars_files: config.yml
 
-- name: Setup fluentbit
-  hosts: webservers
+- name: Setup prometheus
+  hosts: prometheus
   gather_facts: false
   become: true
   roles:
-    - logs
+    - prometheus
   vars_files: config.yml
 
-- name: Setup es and kibana
-  hosts: elk
+- name: Setup docker for ELK stack
+  hosts: docker_servers
   gather_facts: false
   become: true
   roles:
-    -elk
+    - docker
+  vars_files: config.yml
+
+- name: Setup filebeat
+  hosts: filebeat_servers
+  gather_facts: false
+  become: true
+  roles:
+    - filebeat
+  vars_files: config.yml
+
+- name: Setup elasticsearch
+  hosts: elasticsearch
+  gather_facts: false
+  become: true
+  roles:
+    -elasticsearch
+  vars_files: config.yml
+
+- name: Setup kibana
+  hosts: kibana
+  gather_facts: false
+  become: true
+  roles:
+    -kibana
   vars_files: config.yml
