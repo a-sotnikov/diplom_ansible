@@ -24,10 +24,11 @@ all:
             kibana.dip.lom:
 
     filebeat_servers:
-      webservers:
+        webservers:
 
     docker_servers:
-      logging:
-      filebeat_servers:
-  
+        logging:
+        filebeat_servers:
+
+  vars:
     ansible_user: serv_acc
