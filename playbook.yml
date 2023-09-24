@@ -1,3 +1,18 @@
+- name: Decrypt private key
+  hosts: localhost
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Decrypt private key
+      ansible.builtin.copy:
+        decrypt: true
+        src: './ansible.key'
+        dest: './ansible.key'
+        mode: '600'
+        owner: ansible
+
 - name: Setup webservers
   hosts: webservers
   gather_facts: true
