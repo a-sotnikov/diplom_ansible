@@ -20,12 +20,12 @@
     owner: metrics
     mode: '744'
 
-- name: Open firewalld ports
-  ansible.posix.firewalld:
-    port: "{{ nginxlog_exporter.port }}/tcp"
-    state: enabled
-    immediate: true
-    permanent: true
+# - name: Open firewalld ports
+#   ansible.posix.firewalld:
+#     port: "{{ nginxlog_exporter.port }}/tcp"
+#     state: enabled
+#     immediate: true
+#     permanent: true
 
 - name: Copy service
   ansible.builtin.template:
