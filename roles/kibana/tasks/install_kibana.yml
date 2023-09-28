@@ -29,7 +29,7 @@
     image: kibana:{{ kibana.version }}
     name: kibana
     env:
-      ELASTICSEARCH_HOSTS: 'http://192.168.10.12:{{ elasticsearch.port }}'
+      ELASTICSEARCH_HOSTS: 'es.dip.lom:{{ elasticsearch.port }}'
     volumes:
       - /etc/kibana/config:/home/kibana/config
     published_ports:

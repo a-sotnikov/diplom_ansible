@@ -5,7 +5,7 @@
     name: filebeat
     env:
       setup.kibana.host: kibana.dip.lom:{{ kibana.port }}
-      output.elasticsearch.hosts: ["es.dip.lom:{{ elasticsearch.port }}"]
+      output.elasticsearch.hosts: "es.dip.lom:{{ elasticsearch.port }}"
     volumes:
       - /usr/share/filebeat/:/usr/share/filebeat/
       - /var/log/nginx:/var/log/nginx

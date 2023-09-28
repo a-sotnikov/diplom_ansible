@@ -34,7 +34,7 @@ grafana:
 ### Logging ###
 
 elasticsearch:
-  skip_install: false
+  skip_install: true
   version: '8.7.0'
   port: 9200
 
