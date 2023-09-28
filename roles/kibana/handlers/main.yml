@@ -5,7 +5,7 @@
     name: kibana
     state: started
 
-- name: Start kibana
+- name: Retart kibana
   community.docker.docker_container:
     name: kibana
     restart: true

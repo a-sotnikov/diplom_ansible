@@ -1,2 +1,11 @@
 ---
 # handlers file for filebeat
+- name: Start filebeat
+  community.docker.docker_container:
+    name: filebeat
+    state: started
+
+- name: Restart filebeat
+  community.docker.docker_container:
+    name: filebeat
+    restart: true
