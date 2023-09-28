@@ -39,13 +39,13 @@ elasticsearch:
   port: 9200
 
 kibana:
-  skip_install: true
+  skip_install: false
   version: '8.7.0'
   port: 5601
 
-fluent-bit:
+filebeat:
   skip_install: false
   version: '8.7.0'
 
 docker:
-  skip_install: true
+  skip_install: false
