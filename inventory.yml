@@ -24,9 +24,11 @@ all:
             kibana.dip.lom:
 
     filebeat_servers:
+      children:
         webservers:
 
     docker_servers:
+      children:
         logging:
         filebeat_servers:
 
