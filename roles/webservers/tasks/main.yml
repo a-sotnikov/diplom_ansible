@@ -11,12 +11,11 @@
         name: nginx-{{ nginx.version }}
         state: present
 
-    # - name: Open firewalld ports
-    #   ansible.posix.firewalld:
-    #     port: "{{ nginx.port }}/tcp"
-    #     state: enabled
-    #     immediate: true
-    #     permanent: true
+    - name: Change permissions to nginx logs
+      ansible.builtin.lineinfile:
+        path: '/etc/logrotate.d/nginx'
+        regex: "^.*create.*"
+        line: "    create 0644 nginx root"
 
 - name: Update index.html
   ansible.builtin.template:

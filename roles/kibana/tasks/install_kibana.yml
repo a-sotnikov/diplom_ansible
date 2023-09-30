@@ -1,28 +1,28 @@
 ---
-- name: Add group
-  ansible.builtin.group:
-    name: "kibana"
-    state: present
-    system: true
+# - name: Add group
+#   ansible.builtin.group:
+#     name: "kibana"
+#     state: present
+#     system: true
 
-- name: Add user
-  ansible.builtin.user:
-    name: "kibana"
-    group: "kibana"
-    create_home: false
-    shell: "/usr/sbin/nologin"
-    system: true
-    state: present
+# - name: Add user
+#   ansible.builtin.user:
+#     name: "kibana"
+#     group: "kibana"
+#     create_home: false
+#     shell: "/usr/sbin/nologin"
+#     system: true
+#     state: present
 
-- name: Create dirs
-  ansible.builtin.file:
-    path: "{{ item }}"
-    owner: kibana
-    mode: '744'
-    state: directory
-  loop:
-    - '/etc/kibana/config'
-    - '/usr/share/kibana'
+# - name: Create dirs
+#   ansible.builtin.file:
+#     path: "{{ item }}"
+#     owner: kibana
+#     mode: '744'
+#     state: directory
+#   loop:
+#     - '/etc/kibana/config'
+#     - '/usr/share/kibana'
 
 - name: Create kibana container
   community.docker.docker_container:
@@ -30,8 +30,8 @@
     name: kibana
     env:
       ELASTICSEARCH_HOSTS: 'http://es.dip.lom:{{ elasticsearch.port }}'
-    volumes:
-      - /etc/kibana/config:/home/kibana/config
+    # volumes:
+    #   - /etc/kibana/config:/home/kibana/config
     published_ports:
       - "{{ kibana.port }}:5601"
     restart_policy: "on-failure"

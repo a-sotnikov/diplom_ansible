@@ -1,4 +1,19 @@
 ---
+---
+- name: Copy nginx module configuration
+  ansible.builtin.copy:
+    src: nginx.yml
+    dest: '/home/serv_acc/nginx.yml'
+    owner: serv_acc
+    mode: '644'
+
+- name: Templating filebeat config file
+  ansible.builtin.template:
+    src: filebeat.yml.j2
+    dest: '/home/serv_acc/filebeat.yml'
+    owner: serv_acc
+    mode: '644'
+
 - name: Create filebeat container
   community.docker.docker_container:
     image: elastic/filebeat:{{ filebeat.version }}
@@ -7,8 +22,10 @@
       setup.kibana.host: kibana.dip.lom:{{ kibana.port }}
       output.elasticsearch.hosts: "es.dip.lom:{{ elasticsearch.port }}"
     volumes:
-      - /usr/share/filebeat/:/usr/share/filebeat/
+      - /etc/filebeat/:/etc/filebeat/
       - /var/log/nginx:/var/log/nginx
+      - /home/serv_acc/nginx.yml:/usr/share/filebeat/modules.d/nginx.yml
+      - /home/serv_acc/filebeat.yml:/usr/share/filebeat/filebeat.yml
     restart_policy: "on-failure"
     restart_retries: 3
     state: present

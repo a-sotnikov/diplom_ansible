@@ -1,0 +1,14 @@
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+processors:
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+
+output.elasticsearch:
+  hosts: ["es.dip.lom:{{ elasticsearch.port }}"]
+
+setup.kibana:
+  host: "kibana.dip.lom:{{ kibana.port }}" 
