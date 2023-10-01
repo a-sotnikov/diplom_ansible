@@ -17,9 +17,11 @@
   community.docker.docker_container:
     image: '{{ filebeat.image }}:{{ filebeat.version }}'
     name: filebeat
+    user: 'root'
     env:
       setup.kibana.host: kibana.dip.lom:{{ kibana.port }}
       output.elasticsearch.hosts: "es.dip.lom:{{ elasticsearch.port }}"
+      --strict.perms: false
     volumes:
       - /etc/filebeat/:/etc/filebeat/
       - /var/log/nginx:/var/log/nginx

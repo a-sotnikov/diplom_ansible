@@ -11,12 +11,6 @@
         name: nginx-{{ nginx.version }}
         state: present
 
-    - name: Change permissions to nginx logs
-      ansible.builtin.lineinfile:
-        path: '/etc/logrotate.d/nginx'
-        regex: "^.*create.*"
-        line: "    create 0644 nginx root"
-
 - name: Update index.html
   ansible.builtin.template:
     src: static/index.html.j2
