@@ -35,17 +35,20 @@ grafana:
 
 elasticsearch:
   skip_install: true
-  version: '8.7.0'
+  image: 'elastic/elasticsearch'
+  version: '8.10.0'
   port: 9200
 
 kibana:
   skip_install: false
-  version: '8.7.0'
+  image: 'elastic/kibana'
+  version: '8.10.0'
   port: 5601
 
 filebeat:
   skip_install: false
-  version: '8.7.0'
+  image: 'elastic/filebeat'
+  version: '8.10.0'
 
 docker:
   skip_install: false

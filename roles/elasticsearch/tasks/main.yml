@@ -3,4 +3,4 @@
 - name: Install elasticsearch
   ansible.builtin.include_tasks:
     file: install_elasticsearch.yml
-  when: not grafana.skip_install
+  when: not elasticsearch.skip_install

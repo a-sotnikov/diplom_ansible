@@ -1,5 +1,4 @@
 ---
----
 - name: Copy nginx module configuration
   ansible.builtin.copy:
     src: nginx.yml
@@ -16,7 +15,7 @@
 
 - name: Create filebeat container
   community.docker.docker_container:
-    image: elastic/filebeat:{{ filebeat.version }}
+    image: '{{ filebeat.image }}:{{ filebeat.version }}'
     name: filebeat
     env:
       setup.kibana.host: kibana.dip.lom:{{ kibana.port }}

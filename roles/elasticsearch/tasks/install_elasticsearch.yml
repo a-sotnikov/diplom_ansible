@@ -23,7 +23,7 @@
 
 - name: Create es container
   community.docker.docker_container:
-    image: elasticsearch:{{ elasticsearch.version }}
+    image: '{{ elasticsearch.image }}:{{ elasticsearch.version }}'
     name: elasticsearch
     env:
       xpack.security.enabled: "false"

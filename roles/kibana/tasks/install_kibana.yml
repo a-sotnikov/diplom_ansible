@@ -26,7 +26,7 @@
 
 - name: Create kibana container
   community.docker.docker_container:
-    image: kibana:{{ kibana.version }}
+    image: '{{ kibana.image }}:{{ kibana.version }}'
     name: kibana
     env:
       ELASTICSEARCH_HOSTS: 'http://es.dip.lom:{{ elasticsearch.port }}'
