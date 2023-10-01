@@ -1,0 +1,6 @@
+---
+# tasks file for fluentbit
+- name: Install fluent-bit
+  ansible.builtin.include_tasks:
+    file: install_fluent-bit.yml
+  when: not fluent-bit.skip_install

@@ -34,7 +34,7 @@ grafana:
 ### Logging ###
 
 elasticsearch:
-  skip_install: true
+  skip_install: false
   image: 'elastic/elasticsearch'
   version: '8.10.2'
   port: 9200
@@ -49,6 +49,10 @@ filebeat:
   skip_install: false
   image: 'elastic/filebeat'
   version: '8.10.2'
+
+fluent-bit:
+  skip_install: false
+  version: '2.1'
 
 docker:
   skip_install: false

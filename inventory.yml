@@ -27,6 +27,10 @@ all:
       children:
         webservers:
 
+    fluent-bit_servers:
+      children:
+        webservers:
+
     docker_servers:
       children:
         logging:

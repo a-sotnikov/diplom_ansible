@@ -76,3 +76,11 @@
   roles:
     - filebeat
   vars_files: config.yml
+
+- name: Setup fluent-bit
+  hosts: fluent-bit_servers
+  gather_facts: false
+  become: true
+  roles:
+    - fluent-bit
+  vars_files: config.yml
