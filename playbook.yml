@@ -53,14 +53,6 @@
     - docker
   vars_files: config.yml
 
-- name: Setup filebeat
-  hosts: filebeat_servers
-  gather_facts: false
-  become: true
-  roles:
-    - filebeat
-  vars_files: config.yml
-
 - name: Setup elasticsearch
   hosts: elasticsearch
   gather_facts: false
@@ -75,4 +67,12 @@
   become: true
   roles:
     - kibana
+  vars_files: config.yml
+
+- name: Setup filebeat
+  hosts: filebeat_servers
+  gather_facts: false
+  become: true
+  roles:
+    - filebeat
   vars_files: config.yml
