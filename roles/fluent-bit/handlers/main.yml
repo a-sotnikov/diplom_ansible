@@ -1,14 +1,14 @@
 ---
 # handlers file for fluentbit
 
-- name: Start fluent-bit
+- name: Start fluentbit
   ansible.builtin.systemd:
-    service: fluent-bit
+    service: 'fluent-bit'
     state: started
     enabled: true
 
-- name: Restart fluent-bit
+- name: Restart fluentbit
   ansible.builtin.systemd:
-    service: fluent-bit
+    service: 'fluent-bit'
     state: restarted
     enabled: true

@@ -50,7 +50,7 @@ filebeat:
   image: 'elastic/filebeat'
   version: '8.10.2'
 
-fluent-bit:
+fluentbit:
   skip_install: false
   version: '2.1'
 
