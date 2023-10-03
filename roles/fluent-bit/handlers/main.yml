@@ -7,7 +7,7 @@
     state: started
     enabled: true
 
-- name: Retart fluent-bit
+- name: Restart fluent-bit
   ansible.builtin.systemd:
     service: fluent-bit
     state: restarted
