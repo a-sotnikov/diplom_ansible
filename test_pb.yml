@@ -21,6 +21,14 @@
     - webservers
   vars_files: config.yml
 
+- name: Setup docker for ELK stack
+  hosts: docker_servers
+  gather_facts: false
+  become: true
+  roles:
+    - docker
+  vars_files: config.yml
+
 - name: Setup elasticsearch
   hosts: elasticsearch
   gather_facts: false

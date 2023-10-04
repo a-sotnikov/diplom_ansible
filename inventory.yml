@@ -37,4 +37,4 @@ all:
         filebeat_servers:
 
   vars:
-    ansible_user: serv_acc
+    ansible_user: ansible
