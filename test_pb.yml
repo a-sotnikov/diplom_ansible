@@ -1,23 +1,54 @@
-- name: Setup docker
-  hosts: logs
+- name: Decrypt private key
+  hosts: localhost
   gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: Decrypt private key
+      ansible.builtin.copy:
+        decrypt: true
+        src: './ansible.key'
+        dest: './ansible.key'
+        mode: '600'
+        owner: ansible
+
+- name: Setup webservers
+  hosts: webservers
+  gather_facts: true
   become: true
   roles:
-    - docker
+    - webservers
   vars_files: config.yml
 
-- name: Setup and configure elasticsearch
-  hosts: es
+- name: Setup elasticsearch
+  hosts: elasticsearch
   gather_facts: false
   become: true
   roles:
     - elasticsearch
   vars_files: config.yml
 
-- name: Setup and configure kibana
+- name: Setup kibana
   hosts: kibana
   gather_facts: false
   become: true
   roles:
     - kibana
+  vars_files: config.yml
+
+- name: Setup filebeat
+  hosts: filebeat_servers
+  gather_facts: false
+  become: true
+  roles:
+    - filebeat
+  vars_files: config.yml
+
+- name: Setup fluent-bit
+  hosts: fluent-bit_servers
+  gather_facts: false
+  become: true
+  roles:
+    - fluent-bit
   vars_files: config.yml
