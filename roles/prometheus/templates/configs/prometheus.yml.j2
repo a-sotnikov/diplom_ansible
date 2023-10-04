@@ -31,5 +31,7 @@ scrape_configs:
 
     static_configs:
       - targets:
-          - localhost:{{ node_exporter.port }}
-          - localhost:{{ nginxlog_exporter.port }}
+          - web1.dip.lom:{{ node_exporter.port }}
+          - web1.dip.lom:{{ nginxlog_exporter.port }}
+          - web2.dip.lom:{{ node_exporter.port }}
+          - web2.dip.lom:{{ nginxlog_exporter.port }}
