@@ -103,6 +103,6 @@
     Match *
     Host  es.dip.lom
     Port  {{ elasticsearch.port }}
-    Index fluent-bit
+    Index fluent-bit-{{ inventory_hostname_short }}
     Type  _doc
     Suppress_Type_Name On

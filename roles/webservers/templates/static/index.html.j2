@@ -1,28 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Notology sysamd final work</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Итоговая аттестация</title>
+    <style>
+        html {
+            height: 100%;
+          }
+        
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        header {
+            background-color: #366;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #366;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table, th, td {
+            border: 1px solid;
+            border-color: #999;
+            border-collapse: collapse;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+        h2 {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1;
+            
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #444;
+            border-radius: 5px;
+            flex: 1;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        li {
+            font-size: 22px;
+            line-height: 1.2;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Сайт для дипломной работы</h1>
-  </header>
-  <main>
-    <section>
-      <h2>About</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et lobortis lectus, a ullamcorper lorem. Proin a leo a dolor laoreet efficitur vitae eu risus. Fusce ac lacinia felis.</p>
-      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque sodales, mauris at efficitur iaculis, lacus sapien ultrices nisl, ac elementum nisi ligula et velit.</p>
-      <p>hostname: {{ ansible_hostname }}</p>
-    </section>
-    <section>
-      <h2>Methodology</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et lobortis lectus, a ullamcorper lorem. Proin a leo a dolor laoreet efficitur vitae eu risus. Fusce ac lacinia felis.</p>
-      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque sodales, mauris at efficitur iaculis, lacus sapien ultrices nisl, ac elementum nisi ligula et velit.</p>
-    </section>
-  </main>
-  <footer>
-    <p>&copy; 2023 Your Name. All rights reserved.</p>
-  </footer>
+    <header>
+        <h1>Страничка итоговой дипломной работы</h1>
+        <h2>Профессия системный администратор</h2>
+    </header>
+    <div class="container">
+        <h2>Если вы это видите, значит nginx и балансировщик нагрузки настроены более-менее нормально.</h2>
+        <ul>
+            <li><b>FQDN:</b> {{ inventory_hostname }}</li>
+            <li><b>Internal IP:</b> {{ ansible_default_ipv4.address }}</li>
+            <li><b>Real hostname:</b> {{ ansible_hostname }}</li>
+        </ul>       
+    </div>
 </body>
+
+<footer>
+    <p>Автор - Андрей Сотников</p>
+    <p>Группа - SYS-16</p>
+</footer>
 </html>
