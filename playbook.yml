@@ -69,13 +69,13 @@
     - kibana
   vars_files: config.yml
 
-- name: Setup filebeat
-  hosts: filebeat_servers
-  gather_facts: false
-  become: true
-  roles:
-    - filebeat
-  vars_files: config.yml
+# - name: Setup filebeat
+#   hosts: filebeat_servers
+#   gather_facts: false
+#   become: true
+#   roles:
+#     - filebeat
+#   vars_files: config.yml
 
 - name: Setup fluent-bit
   hosts: fluent-bit_servers
