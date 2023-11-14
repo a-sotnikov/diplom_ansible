@@ -87,12 +87,14 @@
     Path /var/log/nginx/access.log
     Read_from_Head true
     Parser nginx_access
+    Tag access
 
 [INPUT]
     name tail
     Path /var/log/nginx/error.log
     Read_from_Head true
     Parser nginx_error
+    Tag error
 
 [OUTPUT]
     name  stdout
