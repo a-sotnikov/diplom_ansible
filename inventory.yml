@@ -23,15 +23,15 @@ all:
           hosts:
             kibana.dip.lom:
 
-    filebeat_servers:
+    filebeat-servers:
       children:
         webservers:
 
-    fluent-bit_servers:
+    fluent-bit-servers:
       children:
         webservers:
 
-    docker_servers:
+    docker-servers:
       children:
         logging:
         filebeat_servers:
