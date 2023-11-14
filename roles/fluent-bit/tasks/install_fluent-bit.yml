@@ -20,19 +20,3 @@
     state: present
     enablerepo: Fluent Bit
   notify: Start fluent-bit
-
-- name: Copy parsers
-  ansible.builtin.copy:
-    src: nginx_parsers.conf
-    dest: /etc/fluent-bit/nginx_parsers.conf
-    owner: root
-    mode: '644'
-  notify: Restart fluent-bit
-
-- name: Install fluentbit repo
-  ansible.builtin.template:
-    src: fluent-bit.conf.j2
-    dest: /etc/fluent-bit/fluent-bit.conf
-    mode: '644'
-    owner: root
-  notify: Restart fluent-bit
