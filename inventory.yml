@@ -34,7 +34,6 @@ all:
     docker-servers:
       children:
         logging:
-        filebeat_servers:
 
   vars:
     ansible_user: ansible

@@ -29,7 +29,7 @@
     - metrics
   vars_files: config.yml
 
-- name: Setup prometheus
+- name: Setup grafana
   hosts: grafana
   gather_facts: false
   become: true
